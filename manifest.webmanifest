@@ -1,0 +1,25 @@
+{
+  "name": "Finanzplaner",
+  "short_name": "Finanzplaner",
+  "description": "Persönlicher Finanzplaner für Studium und Alltag – offline und privat, alle Daten bleiben auf dem Gerät.",
+  "lang": "de",
+  "dir": "ltr",
+  "id": "./",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#050D12",
+  "theme_color": "#050D12",
+  "categories": ["finance", "productivity"],
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Ausgabe erfassen", "short_name": "Ausgabe", "url": "./index.html#/expenses?neu=ausgabe", "icons": [{ "src": "icon-192.png", "sizes": "192x192", "type": "image/png" }] },
+    { "name": "Einnahme erfassen", "short_name": "Einnahme", "url": "./index.html#/income?neu=einnahme", "icons": [{ "src": "icon-192.png", "sizes": "192x192", "type": "image/png" }] },
+    { "name": "Kalender", "short_name": "Kalender", "url": "./index.html#/calendar", "icons": [{ "src": "icon-192.png", "sizes": "192x192", "type": "image/png" }] }
+  ]
+}
