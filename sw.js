@@ -1,7 +1,7 @@
 /* Finanzplaner – Service Worker
    Liefert die App offline aus dem Speicher und aktualisiert sie still im Hintergrund.
    Bei jeder neuen App-Version VERSION erhöhen (muss APP_VERSION in index.html entsprechen). */
-const VERSION = '3.22';
+const VERSION = '3.25';
 const CACHE = `finanzplaner-${VERSION}`;
 const FONTS = 'fonts-cache';
 const CORE = ['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png', './icon-maskable-512.png'];
@@ -21,6 +21,14 @@ self.addEventListener('fetch', (event) => {
   const request = event.request;
   if (request.method !== 'GET') return;
   const url = new URL(request.url);
+
+  if (url.origin === location.origin && /\/kurse\.json$/.test(url.pathname)) {
+    // Kurse (F3): immer zuerst aus dem Netz, offline der zuletzt geladene Stand
+    event.respondWith(caches.open(CACHE).then((cache) => fetch(request)
+      .then((response) => { if (response && response.ok) cache.put('./kurse.json', response.clone()); return response; })
+      .catch(() => cache.match('./kurse.json').then((hit) => hit || Response.error()))));
+    return;
+  }
 
   if (url.origin === location.origin) {
     // sofort aus dem Speicher, parallel aus dem Netz nachladen (stale-while-revalidate)
